@@ -7,7 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Str;
+use Mail;
+use App\Mail\verifyEmail;
+use Session;
 
 
 class RegisterController extends Controller
@@ -54,7 +57,7 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:255',
-            'address' => 'required|string|max:255',
+            'address'=> 'required|string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -66,13 +69,39 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
-        return User::create([
+    {   //message to verify 
+        Session::flash('status','Registered! But please verify your email to activate your account');
+        //create an user and use its id
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'address' => $data['address'],
             'password' => bcrypt($data['password']),
+            'verifyToken' => Str::random(40),
         ]);
+        
+        $thisUser = User::findOrFail($user->id);
+        $this->sendEmail($thisUser);
+        return $user;
+    }
+
+    public function sendEmail($thisUser) //send email to user
+    {
+        Mail::to($thisUser['email'])->send(new verifyEmail($thisUser));
+    }
+
+    public function verifyEmailFirst()
+    {
+        return view('email.verifyEmailFirst');
+    }
+
+    public function sendEmailDone($email,$verifyToken){
+        $user = User::where(['email'=>$email,'verifyToken'=>$verifyToken])->first();
+        if($user){
+            return user::where(['email'=>$email,'verifyToken'=>$verifyToken])->update(['status'=>'1','verifyToken'=>NULL]);
+        }else{
+            'user not found';
+        }
     }
 }
