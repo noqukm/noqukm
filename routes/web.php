@@ -19,6 +19,8 @@ Auth::routes();
 
 //USER
 Route::get('/home', 'HomeController@index');
+Route::get('verifyEmailFirst','Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');//verification
+Route::get('verify/{email}/{verifyToken}','Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 //STAFF
@@ -34,7 +36,6 @@ Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('adm
 Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 Route::get('/admin', 'AdminController@index')->name('admin.dashboard');
 Route::get('/admin/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-
 
 Route::post('/admin/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
 Route::get('/admin/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
