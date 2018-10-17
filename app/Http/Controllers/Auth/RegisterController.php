@@ -99,9 +99,10 @@ class RegisterController extends Controller
     public function sendEmailDone($email,$verifyToken){
         $user = User::where(['email'=>$email,'verifyToken'=>$verifyToken])->first();
         if($user){
-            return user::where(['email'=>$email,'verifyToken'=>$verifyToken])->update(['status'=>'1','verifyToken'=>NULL]);
+            user::where(['email'=>$email,'verifyToken'=>$verifyToken])->update(['status'=>'1','verifyToken'=>NULL]);
+            return view('email.successfulVerification');
         }else{
-            'user not found';
+            
         }
     }
 }

@@ -8,8 +8,8 @@
                 <div class="panel-heading">
                     Dashboard
                 <div class="panel-body">
-                    <div class="alert alert-danger" role="alert">
-                        Please verify your email first!
+                    <div class="alert alert-success" role="alert">
+                        Your E-mail is verified. You can login to use our system!
                       </div>
 
                

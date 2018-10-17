@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'NOQSYSTEM') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -45,6 +45,8 @@
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}" style="font-size: 30px; color: #f8bbd0;">Login</a></li>
                             <li><a href="{{ route('register') }}" style="font-size: 30px; color: #f8bbd0;">Register</a></li>
+                            <li><a href="{{ url('/product') }}" style="font-size: 30px; color: #f8bbd0;">Products</a></li>
+
                         @else
                             <li class="dropdown">
                                 <a href="#" style="font-size: 20px; color: #f8bbd0;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -52,6 +54,8 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+
+                                    <li><a href="{{ url('/product') }}" >Products</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
