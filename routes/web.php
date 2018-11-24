@@ -49,3 +49,6 @@ Route::get('add-to-cart/{id}', 'ProductsController@addToCart');
 
 Route::patch('update-cart', 'ProductsController@update');
  Route::delete('remove-from-cart', 'ProductsController@remove');
+
+ //PRODUCT
+ Route::resource('products','ProductsController');

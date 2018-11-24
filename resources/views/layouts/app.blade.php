@@ -56,6 +56,7 @@
                                 <ul class="dropdown-menu" role="menu">
 
                                     <li><a href="{{ url('/product') }}" >Products</a></li>
+                                    <li><a href="{{ url('/home') }}"> Menu</a></li>
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -74,11 +75,15 @@
                 </div>
             </div>
         </nav>
-
+        @include('src.messages')
         @yield('content')
     </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'article-ckeditor' );
+    </script>
 </body>
 </html>

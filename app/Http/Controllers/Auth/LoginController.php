@@ -44,7 +44,7 @@ class LoginController extends Controller
         {
             Auth::guard('web')->logout();
 
-            return redirect('/');
+            return view(home);
     }
 
     protected function credentials(Request $request)
