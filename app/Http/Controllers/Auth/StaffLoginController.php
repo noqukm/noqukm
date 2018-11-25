@@ -27,6 +27,7 @@ class StaffLoginController extends Controller
          $this->validate($request,
           [
         'staff_id' => 'required',
+        'email' =>'required',
         'password' => 'required|min:6'
          ]);
 

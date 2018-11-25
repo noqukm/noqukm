@@ -1,17 +1,21 @@
-@extends('layout')
+@extends('layouts.app')
  
 @section('title', 'Cart')
  
 @section('content')
- 
-    <table id="cart" class="table table-hover table-condensed">
+
+<div class="row">
+<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+    <table id="cart" class="table table-bordered">
         <thead>
         <tr>
-            <th style="width:50%">Product</th>
-            <th style="width:10%">Price</th>
-            <th style="width:8%">Quantity</th>
-            <th style="width:22%" class="text-center">Subtotal</th>
-            <th style="width:10%"></th>
+           
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quantity</th>
+            <th style="width:20%" class="text-center">Subtotal</th>
+            <th scope="col"> </th>
         </tr>
         </thead>
         <tbody>
@@ -32,33 +36,40 @@
                             </div>
                         </div>
                     </td>
+                    
                     <td data-th="Price">RM {{ $details['price'] }}</td>
+
                     <td data-th="Quantity">
-                        <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity" />
-                    </td>
-                    <td data-th="Subtotal" class="text-center">RM {{ $details['price'] * $details['quantity'] }}</td>
+                        <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity"></td>
+                    <td data-th="Subtotal" class="text-center">RM {{ number_format($details['price'] * $details['quantity'], 2) }}</td>
+
                     <td class="actions" data-th="">
-                        <button class="btn btn-info btn-sm update-cart" data-id="{{ $id }}"><i class="fa fa-refresh"></i></button>
-                        <button class="btn btn-danger btn-sm remove-from-cart" data-id="{{ $id }}"><i class="fa fa-trash-o"></i></button>
-                    </td>
-                </tr>
+                            <button class="btn btn-success btn-s update-cart" data-id="{{ $id }}">Update</button>
+                            <button class="btn btn-danger btn-s remove-from-cart" data-id="{{ $id }}">Delete</button>
+                        </td>
+                    </tr>
             @endforeach
         @endif
  
         </tbody>
         <tfoot>
         <tr class="visible-xs">
-            <td class="text-center"><strong>Total : RM {{ $total }}</strong></td>
+            <td class="text-center"><strong>Total : RM {{ number_format ($total, 2) }}</strong></td>
         </tr>
         <tr>
-            <td><a href="{{ url('/product') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-            <td colspan="2" class="hidden-xs"></td>
-            <td class="hidden-xs text-center"><strong>Total RM{{ $total }}</strong></td>
+            <td colspan="3" class="hidden-xs"></td>
+            <td class="hidden-xs text-center"><strong>Total RM{{ number_format($total, 2) }}</strong></td>
+        </tr>
+        <tr>
+        	<td colspan="4"><a href="{{ url('/product') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+        	 <td><a href="#" class="btn btn-primary"><i class="fa fa-angle-left"></i> Check Out</a></td>
         </tr>
         </tfoot>
     </table>
- 
-@endsection
+ </div>
+</div>
+
+
 
 @section('scripts')
     <script type="text/javascript">
@@ -97,4 +108,6 @@
  
     </script>
  
+@endsection
+
 @endsection

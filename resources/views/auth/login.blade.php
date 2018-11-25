@@ -4,18 +4,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default" style="background-color: #fce4ec">
-                @if (session('status')) <!--showing whether user is verified or not -->
-                {{session('status')}}
-                @endif
-                <div class="panel-heading" style="font-size: 20px;color: #ad1457;"> Customer Login</div>
+            <div class="panel panel-primary">
+                    @if (session('status')) <!--showing whether user is verified or not -->
+                    {{session('status')}}
+                    @endif
+                <div class="panel-heading" style="font-size: 20px; color: #ffff;">Customer Login</div>
 
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label" style="font-size: 20px; color: #512da8">E-Mail Address</label>
+                            <label for="email" class="col-md-4 control-label" style="font-size: 15px; color: #000000;">E-Mail Address</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
@@ -29,7 +29,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label" style="font-size: 20px; color: #512da8;">Password</label>
+                            <label for="password" class="col-md-4 control-label" style="font-size: 15px; color: #000000;">Password</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
@@ -42,7 +42,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                      <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                                 <div class="checkbox">
                                     <label>
@@ -50,7 +50,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> 
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">
@@ -58,13 +58,13 @@
                                     Login
                                 </button>
 
-                                <!--<a class="btn btn-link" href="{{ route('password.request') }}">
+                               <!--  <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a> -->
 
 
-                                <a class="btn btn-link" href="{{ route('staff.login') }}">
-                                    Login as Staff
+                                <a class="btn btn-link" href="staff/login">
+                                    Sign-in as Staff
                                 </a>
                             </div>
                         </div>

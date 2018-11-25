@@ -7,6 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Staff extends Authenticatable
 {
+
+    public $table = 'staffs';
+
     use Notifiable;
     protected $guard = 'staff';
 
