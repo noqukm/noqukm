@@ -20,7 +20,7 @@
                         <tr>
                             <th>{{$product->name}}</th>
                             <th>RM {{$product->price}}</th>
-                            <th><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($product->photo)) }}" height="100" width="100"></th>
+                            <th><img src="storage/photos/{{$product->photo}}" width=100, height=100></th>
                         <th><a href="/noqukm/public/products/{{$product->id}}/edit" class="btn btn-default">Edit</a></th>
                             <th></th>
                         </tr>
@@ -39,12 +39,11 @@
                         </div>
                     @endif
 
-                <!--@component('components.who')
-                @endcomponent-->
+           
                 </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsectio
+@endsection

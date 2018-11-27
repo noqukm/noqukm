@@ -3,7 +3,7 @@
 @section('content')
     <h1>Create Food</h1>
     <!--form-->
-    {!! Form::open(['action' => 'ProductsController@store','method'=>'POST']) !!}
+    {!! Form::open(['action' => 'MenuController@store','method'=>'POST','enctype'=>'multipart/form-data']) !!}
     <div class="form-group">
     {{Form::label('name','Name')}}
     {{Form::text('name','',['class'=> 'form-control','placeholder' => 'Name'])}}

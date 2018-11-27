@@ -23,10 +23,11 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/home', 'HomeController@index');
 	Route::get('/profile','ProfileController@index');
 	Route::get('/editProfile','ProfileController@editProfile');
-	Route::get('verifyEmailFirst','Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');//verification
-	Route::get('verify/{email}/{verifyToken}','Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
+	
 	Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 });
+Route::get('verifyEmailFirst','Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');//verification
+Route::get('verify/{email}/{verifyToken}','Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
 
 //Route::get('/home', 'HomeController@index');
 //Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
@@ -60,3 +61,4 @@ Route::delete('remove-from-cart', 'ProductsController@remove');
 
 //PRODUCT
 Route::resource('products','MenuController');
+Route::get('/dashboard','Dashboardcontroller@index');

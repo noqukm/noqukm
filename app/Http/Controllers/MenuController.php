@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 //use DB
 use App\Product;
 
@@ -34,17 +35,34 @@ class MenuController extends Controller
          $this->validate($request,[
             'name' => 'required',
             'price' => 'required',
+            'photo' => 'image|nullable|max:1999',
             'description' => 'required'
         ]);
+
+         //Handle File Upload
+         if($request->hasFile('photo')){
+            //Get filename with the extension
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            //Filename to store
+            $fileNametoStore= $filename.'_'.time().'.'.$extension;
+            //Upload Image
+            $path = $request->file('photo')->storeAs('public/photos',$fileNametoStore);
+         }
         
         //create product in database 
         $product = Product::find($id);
         $product->name = $request->input('name');
-        $product->photo = $request->input('photo');
+        if($request->hasfile('photo')){
+            $product->photo= $fileNametoStore;
+        }
         $product->price = $request->input('price');
         $product->description = $request->input('description');
         $product->save();
-        return redirect('/products')->with('success','Post Updated');
+        return redirect('/dashboard')->with('success','Post Updated');
     }
     public function create(){
         return view('products.create');
@@ -55,23 +73,44 @@ class MenuController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'price' => 'required',
+            'photo' => 'image|nullable|max:1999',
             'description' => 'required'
         ]);
+
+        //Handle File Upload
+        if($request->hasFile('photo')){
+            //Get filename with the extension
+            $filenameWithExt = $request->file('photo')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+            //Get just extension
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            //Filename to store
+            $fileNametoStore= $filename.'_'.time().'.'.$extension;
+            //Upload Image
+            $path = $request->file('photo')->storeAs('public/photos',$fileNametoStore);
+        }else{
+            $fileNametoStore = 'noimage.jpg';
+        }
         
         //create product in database 
         $product = new Product;
         $product->name = $request->input('name');
-        $product->photo = $request->input('photo');
+        $product->photo = $fileNametoStore;
         $product->price = $request->input('price');
         $product->description = $request->input('description');
         $product->user_id = auth()->user()->id;
         $product->save();
-        return redirect('/products')->with('success','Post Created');
+        return redirect('/dashboard')->with('success','Post Created');
         
     }
     public function destroy($id){
         $product = Product::find($id);
         $product->delete();
-        return redirect('/products')->with('success','Post Removed');
+        if($product->photo !='noimage.jpg'){
+                //Delete Image
+                Storage::delete('public/photos/'.$product->photo);
+        }
+        return redirect('/dashboard')->with('success','Post Removed');
     }
 }
