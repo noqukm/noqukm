@@ -67,13 +67,14 @@
                         
                             <li><a href="{{ url('product') }}">Products</a></li>
                             <li>
-                                <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" style="color:black" aria-hidden="true" ></span> Cart({{ count(session('cart')) }})</a>
+                                <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" style="color:black" aria-hidden="true" ></span> </a>
                             </li>
                         @else
 
                             <li><a href="{{ url('product') }}">Products</a></li>
+                            <li><a href="{{ url('/dashboard') }}"> Your Menu </a> </a>
                             <li>
-                                <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" style="color:black" aria-hidden="true" ></span> Cart({{ count(session('cart')) }})</a>
+                                <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" style="color:black" aria-hidden="true" ></span> </a>
                             </li>
                             
                             <li class="dropdown">

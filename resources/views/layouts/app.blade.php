@@ -54,7 +54,7 @@
                             <li><a href="{{ route('register') }}" style="font-size: 20px; color: #ffffff;">Register</a></li>
                             <li><a href="{{ url('product') }}" style="font-size: 20px; color: #ffffff;">Products</a></li>
                             <li>
-                                <a href="{{ url('cart') }}" style="font-size: 20px; color: #ffffff;"><span class="glyphicon glyphicon-shopping-cart" style="color:white" aria-hidden="true" ></span> Cart({{ count(session('cart')) }})</a>
+                                <a href="{{ url('cart') }}" style="font-size: 20px; color: #ffffff;"><span class="glyphicon glyphicon-shopping-cart" style="color:white" aria-hidden="true" ></span> </a>
                             </li>
                         @else
                             <li class="dropdown">
@@ -65,6 +65,7 @@
                                 <ul class="dropdown-menu" role="menu">
 
                                      <li><a href="{{ url('/profile') }}" >Edit Profile</a></li>
+                                <li><a href="{{ url('/dashboard') }}" > Your Menu </a></li>
 
                                     <li>
                                         <a href="{{ route('logout') }}"

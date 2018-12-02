@@ -1238,6 +1238,7 @@
         },
         {
             "name": "symfony/css-selector",
+<<<<<<< HEAD
             "version": "v3.4.19",
             "source": {
                 "type": "git",
@@ -1248,6 +1249,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/css-selector/zipball/345b9a48595d1ab9630db791dbc3e721bf0233e8",
                 "reference": "345b9a48595d1ab9630db791dbc3e721bf0233e8",
+=======
+            "version": "v4.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "9e4dc57949853315561f0cd5eb84d0707465502a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/9e4dc57949853315561f0cd5eb84d0707465502a",
+                "reference": "9e4dc57949853315561f0cd5eb84d0707465502a",
+>>>>>>> 56d348b178ed3b68d623ffc204638bec93cc01e5
                 "shasum": ""
             },
             "require": {
@@ -1287,7 +1300,11 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2018-11-11T19:48:54+00:00"
+=======
+            "time": "2018-11-11T19:51:29+00:00"
+>>>>>>> 56d348b178ed3b68d623ffc204638bec93cc01e5
         },
         {
             "name": "symfony/debug",
@@ -1347,6 +1364,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
+<<<<<<< HEAD
             "version": "v3.4.19",
             "source": {
                 "type": "git",
@@ -1357,6 +1375,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/d365fc4416ec4980825873962ea5d1b1bca46f1a",
                 "reference": "d365fc4416ec4980825873962ea5d1b1bca46f1a",
+=======
+            "version": "v4.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "8b93ce06506d58485893e2da366767dcc5390862"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/8b93ce06506d58485893e2da366767dcc5390862",
+                "reference": "8b93ce06506d58485893e2da366767dcc5390862",
+>>>>>>> 56d348b178ed3b68d623ffc204638bec93cc01e5
                 "shasum": ""
             },
             "require": {
@@ -1406,7 +1436,11 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2018-11-26T10:17:44+00:00"
+=======
+            "time": "2018-11-26T10:26:29+00:00"
+>>>>>>> 56d348b178ed3b68d623ffc204638bec93cc01e5
         },
         {
             "name": "symfony/finder",
@@ -1904,6 +1938,7 @@
         },
         {
             "name": "symfony/translation",
+<<<<<<< HEAD
             "version": "v3.4.19",
             "source": {
                 "type": "git",
@@ -1914,6 +1949,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/translation/zipball/bdbe940ed3ef4179f86032086c32d3a858becc0f",
                 "reference": "bdbe940ed3ef4179f86032086c32d3a858becc0f",
+=======
+            "version": "v4.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/translation.git",
+                "reference": "615e3cf75d00a7d6788316d9631957991ba9c26a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/615e3cf75d00a7d6788316d9631957991ba9c26a",
+                "reference": "615e3cf75d00a7d6788316d9631957991ba9c26a",
+>>>>>>> 56d348b178ed3b68d623ffc204638bec93cc01e5
                 "shasum": ""
             },
             "require": {
@@ -1968,7 +2015,11 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2018-11-26T10:17:44+00:00"
+=======
+            "time": "2018-11-26T10:26:29+00:00"
+>>>>>>> 56d348b178ed3b68d623ffc204638bec93cc01e5
         },
         {
             "name": "symfony/var-dumper",
@@ -3565,6 +3616,7 @@
         },
         {
             "name": "symfony/yaml",
+<<<<<<< HEAD
             "version": "v3.4.19",
             "source": {
                 "type": "git",
@@ -3575,6 +3627,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/symfony/yaml/zipball/291e13d808bec481eab83f301f7bff3e699ef603",
                 "reference": "291e13d808bec481eab83f301f7bff3e699ef603",
+=======
+            "version": "v4.1.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "fe87e3b24d15ec8948f0280ee867a65ca44fdbaa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/fe87e3b24d15ec8948f0280ee867a65ca44fdbaa",
+                "reference": "fe87e3b24d15ec8948f0280ee867a65ca44fdbaa",
+>>>>>>> 56d348b178ed3b68d623ffc204638bec93cc01e5
                 "shasum": ""
             },
             "require": {
@@ -3620,7 +3684,11 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
+<<<<<<< HEAD
             "time": "2018-11-11T19:48:54+00:00"
+=======
+            "time": "2018-11-11T19:51:29+00:00"
+>>>>>>> 56d348b178ed3b68d623ffc204638bec93cc01e5
         },
         {
             "name": "webmozart/assert",

@@ -1,1 +1,1 @@
-To verify email <a href="{{route('sendEmailDone',["email"=> $user->email,"verifyToken"=>$user->verifyToken])}}">click here</a>
+Please verify your email before using NOQ System <a href="{{route('sendEmailDone',["email"=> $user->email,"verifyToken"=>$user->verifyToken])}}">click here</a>

@@ -5,11 +5,11 @@
     @if(count($products) > 0)
         @foreach($products as $product)
             <div class="well">
+            <img src="storage/photos/{{$product->photo}}" width=100, height=100>
             <h3><a href="/noqukm/public/products/{{$product->id}}">{{$product->name}}</a></h3>
-            <small><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($product->photo)) }}" height="100" width="100">
-            </small>
-                <h3>Price: RM {{$product->price}}</h3>
-                <small>Description: {{$product->description}}</small>
+            <h3>Price: RM {{$product->price}}</h3>
+            <h4>Description: {{$product->description}}</h4>
+              
             </div>
             @endforeach
             {{$products->links()}} <!-- pagination -->
