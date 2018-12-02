@@ -58,7 +58,7 @@
                             <label for="v" class="col-md-4 control-label" style="font-size: 18px; color: #512da8;">Change Password</label>
 
                             <div class="col-md-6">
-                                <input id="changepwd" type="input" class="form-control" name="changepwd" required>
+                                <input id="changepwd" type="password" class="form-control" name="changepwd" required>
 
                                 @if ($errors->has('changepwd'))
                                     <span class="help-block">
@@ -72,7 +72,7 @@
                             <label for="v" class="col-md-4 control-label" style="font-size: 18px; color: #512da8;">Re-type Password</label>
 
                             <div class="col-md-6">
-                                <input id="retypepwd" type="input" class="form-control" name="retypepwd" required>
+                                <input id="retypepwd" type="password" class="form-control" name="retypepwd" required>
 
                                 @if ($errors->has('retypepwd'))
                                     <span class="help-block">

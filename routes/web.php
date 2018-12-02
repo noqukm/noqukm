@@ -23,7 +23,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/home', 'HomeController@index');
 	Route::get('/profile','ProfileController@index');
 	Route::get('/editProfile','ProfileController@editProfile');
-	Route::get('verifyEmailFirst','Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');//verification
+	Route::post('/editProfile', 'ProfileController@editProfile');
+	Route::get('verifyEmailFirst','Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst'); //verification
 	Route::get('verify/{email}/{verifyToken}','Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
 	Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 });

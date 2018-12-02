@@ -45,11 +45,26 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li class="active"><a href="">Home</a></li>
-                
+                 
                 <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="{{ route('login') }}">Customer Login</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ route('staff.login') }}">Staff Login</a></li>
+                          </ul>
+
+                        </li> <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Registration <b class="caret"></b></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="{{ route('register') }}">Customer Registration</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{{ route('staff.register') }}">Staff Registration</a></li>
+                          </ul>
+                        </li>
+                        
                             <li><a href="{{ url('product') }}">Products</a></li>
                             <li>
                                 <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" style="color:black" aria-hidden="true" ></span> Cart({{ count(session('cart')) }})</a>
