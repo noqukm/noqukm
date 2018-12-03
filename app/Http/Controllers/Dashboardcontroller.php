@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\User;
+use App\Staff;
+use App\Product;
 
-class dashboardcontroller extends Controller
+class DashboardController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:staff');
     }
 
     /**
@@ -19,8 +20,9 @@ class dashboardcontroller extends Controller
      */
     public function index()
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
-        return view('menu')->with('products',$user->products);
+        /*$user_id = auth()->user()->id;
+        $user = Staff::find($user_id);*/
+        $products = Product::orderBy('name','asc')->paginate(5);
+        return view('menu')->with('products',$products);
     }
 }

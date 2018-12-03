@@ -42,8 +42,8 @@ class StaffRegisterController extends Controller
         return Validator::make($data, [
 
         	'name' => 'required|max:255',
-          'staff_id' => 'required|max:255',
           'email' => 'required|email',
+          'phone' => 'required|max:255',
           'password' => 'required|min:6|confirmed'
         ]);
     }
@@ -53,8 +53,8 @@ class StaffRegisterController extends Controller
     {
         return Staff::create([
           'name' => $data['name'],
-          'staff_id' => $data['staff_id'],
           'email' => $data['email'],
+          'phone' => $data['phone'],
           'password' => bcrypt($data['password']),
         ]);
     }

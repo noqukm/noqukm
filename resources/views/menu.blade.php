@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.staff_navbar')
 
 @section('content')
 <div class="container">
@@ -9,7 +9,8 @@
                 <div class="panel-body">
                     <a href="/noqukm/public/products/create" class="btn btn-primary">Create Food</a>
                     <h3> Your Stall Menu</h3>
-                    @if(count($products) >0)
+                    
+                    @if(count($products)>0)
                     <table class="table table-striped">
                         <tr>
                             <th>Food</th>
@@ -30,7 +31,12 @@
                     <p>You have no products</p>
                     @endif
 
-
+                    <p>
+                        <a href="{{ url('/staff')}}"><button type="button" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-home"></span> Back to Home
+                        </button>
+                    </a>
+                </p>
 
                 <div class="panel-body">
                     @if (session('status'))

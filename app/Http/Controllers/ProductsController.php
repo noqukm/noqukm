@@ -8,10 +8,16 @@ use App\Order;
 
 class ProductsController extends Controller
 {
-     public function index()
+  
+      public function index()
     {
-        $products = Product::all();
-        return view('products', compact('products'));
+        $products = Product::orderBy('name','asc')->paginate(5);
+        //$products = Product::all();
+        //$products = Product::orderBy('title','asc')->get(); to order items desc/asc ->take(1) for 1
+        //$product = Product::where('name','Nasi Lemak')->get();
+        /*return view('products', compact('products'));*/
+        //$products = DB::select('SELECT* FROM PRODUCTS');
+        return view('product-index')->with('products',$products);
     }
  
     public function cart()

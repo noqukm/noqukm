@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'NO-Q Food Ordering') }}</title>
+    <title>NO-Q Online Food Ordering</title>
 
     <!-- Styles -->
    
@@ -52,32 +52,32 @@
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
-                            <li><a href="{{ url('products') }}">Products</a></li>
+                            <li><a href="{{ url('product') }}">Products</a></li>
                             <li>
-                                <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" ></span> </a>
+                                <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" ></span> Cart({{ count(session('cart')) }})</a>
                             </li>
                         @else
-                            <li class="dropdown">
+                          <li>
+                            <a href="{{ url('/') }}">Home</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true" ></span> Cart({{ count(session('cart')) }})</a>
+                        </li>
+                        <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }}<span class="caret"></span>
                                 </a>
 
+                              
                                 <ul class="dropdown-menu" role="menu">
-
-                                     <li><a href="{{ url('/profile') }}" >Edit Profile</a></li>
-
                                     <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
+                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">Logout
                                         </a>
-
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
-
                                 </ul>
                             </li>
                         @endif
@@ -92,6 +92,6 @@
     <!-- Scripts -->
    <!--  <script src="{{ asset('js/app.js') }}"></script> -->
    <!--  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
-    @yield('scripts')
+@yield('scripts')
 </body>
 </html>

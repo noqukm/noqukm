@@ -4,12 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-//use DB
 use App\Product;
+use Auth;
 
 
 class MenuController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:staff');
+    }
+    
     public function index()
     {
         $products = Product::orderBy('name','asc')->paginate(5);
@@ -99,7 +105,7 @@ class MenuController extends Controller
         $product->photo = $fileNametoStore;
         $product->price = $request->input('price');
         $product->description = $request->input('description');
-        $product->user_id = auth()->user()->id;
+        //$product->staff_id = auth()->staff()->id;
         $product->save();
         return redirect('/dashboard')->with('success','Post Created');
         

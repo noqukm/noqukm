@@ -23,6 +23,7 @@
 
     <!-- Custom styles for this template -->
     <link href="../public/css/carousel.css" rel="stylesheet">
+    <link href="../public/css/cardbox.css" rel="stylesheet" type="text/css">
 
   </head>
 <!-- NAVBAR
@@ -64,21 +65,20 @@
                             <li><a href="{{ route('staff.register') }}">Staff Registration</a></li>
                           </ul>
                         </li>
-                        
-                            <li><a href="{{ url('product') }}">Products</a></li>
-                            <li>
-                                <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" style="color:black" aria-hidden="true" ></span> </a>
-                            </li>
-                        @else
 
-                            <li><a href="{{ url('product') }}">Products</a></li>
-                            <li><a href="{{ url('/dashboard') }}"> Your Menu </a> </a>
-                            <li>
-                                <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" style="color:black" aria-hidden="true" ></span> </a>
-                            </li>
+                        <li><a href="{{ url('product') }}">Products</a></li>
+                        <li>
+                          <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" style="color:black" aria-hidden="true" ></span> Cart({{ count(session('cart')) }})</a>
+                        </li>
+
+                        @else
+                        <li><a href="{{ url('product') }}">Products</a></li>
+                        <li>
+                          <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" style="color:black" aria-hidden="true" ></span>Cart({{ count(session('cart')) }})</a>
+                        </li>
                             
                             <li class="dropdown">
-                                <a href="#" style="font-size: 15px; color: #000000;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -382,41 +382,45 @@
     <div class="introSection">
         <div class="container">
         <div class="row">
-        <div class="col-lg-5">
-        <h3>Welcome to restaurent</h3>
-        <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
-        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <br><br>
-        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, 
-        and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+          <figure class="snip1166 red">
+            <img src="../public/images/card1.jpg"/>
+            <figcaption>
+              <h3>Save Your Time </h3>
+              <div>
+                <p>Do not queue for buying food. </p>
+              </div>
+            </figcaption>
+          </figure>
         </div>
-        
-        <div class="col-lg-4">
-        <h3>Welcome to restaurent</h3>
-        <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
-        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. <br><br>
-        
-        </p>
-        
+
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+          <figure class="snip1166 red">
+            <img src="../public/images/card2.jpg"/>
+            <figcaption>
+              <h3>Cozy</h3>
+              <div>
+                <p>For days you just feel like staying in.</p>
+              </div>
+            </figcaption>
+          </figure>
         </div>
-        
-        <div class="col-lg-3">
-        <h3>Welcome to restaurent</h3>
-        <p>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
-        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-        
-        </p>
-        
+
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+          <figure class="snip1166 red">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sample73.jpg" alt="sample73"/>
+            <figcaption>
+              <h3>Convenient</h3>
+              <div>
+                <p>No more skipping lunch, no matter how busy.</p>
+              </div><a href="#"></a>
+            </figcaption>
+          </figure>
         </div>
-        
-        </div>
-        </div>
-    </div>
+
+</div>
+</div>
+</div>
 
 
    <div class="container marketing">
@@ -470,11 +474,9 @@
       <footer>
         <div class="container">
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2014 Company, Inc.</p>
+        <p>&copy; 2014 NO-Q Company, Inc.</p>
         </div>
       </footer>
-
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -482,5 +484,12 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="../public/js/bootstrap.min.js"></script>
     <script src="../public/js/holder.js"></script>
+    <script type="text/javascript">
+        //For cardbox
+        $(".hover").mouseleave(
+          function () {
+            $(this).removeClass("hover");
+          });
+        </script>
   </body>
 </html>

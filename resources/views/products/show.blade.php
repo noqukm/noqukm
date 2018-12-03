@@ -1,6 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.staff_navbar')
 
 @section('content')
+<div class="container">
+    <div class="row">
     <a href="/noqukm/public/products" class="btn btn-default">Go Back</a>
     <h1>{{$product-> name}}</h1>
     <div class="well">
@@ -16,4 +18,6 @@
                 {{Form::hidden('_method','DELETE')}}
                 {{Form::submit('Delete', ['class'=>'btn btn-danger'])}}
         {!!Form::close()!!}
+    </div>
+</div>
 @endsection

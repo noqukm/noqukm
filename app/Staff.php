@@ -20,7 +20,7 @@ class Staff extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'staff_id','email', 'password',
+        'name','email', 'phone', 'password',
     ];
 
     /**
@@ -31,4 +31,10 @@ class Staff extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+      public function products(){
+        return $this->hasMany('App\Product');
+    }
+
+
 }

@@ -148,7 +148,12 @@ h5{
                     @endforeach
                 </tbody>
               </table>
-
+              <p>
+                <a href="{{ url('/staff')}}"><button type="button" class="btn btn-default btn-sm">
+                  <span class="glyphicon glyphicon-home"></span> Back to Home
+                </button>
+              </a>
+            </p>
 
 <div class="clearfix"></div>
 <ul class="pagination pull-right">

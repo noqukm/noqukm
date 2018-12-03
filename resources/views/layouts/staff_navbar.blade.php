@@ -23,7 +23,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
-            <div class="container-fluid" style="background-color: #191970">
+            <div class="container-fluid">
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -35,10 +35,9 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="#"  style="color: white; padding-bottom: 70px; ">
-                         
-                          <h3>NO-Q Online Food Ordering</h3>
-                      </a>
+                    <a class="navbar-brand" href="#">
+                        {{ config('app.name', 'NO-Q Food Ordering') }}
+                    </a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -51,22 +50,22 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}" style="font-size: 20px; color: #ffffff;">Login</a></li>
-                            <li><a href="{{ route('register') }}" style="font-size: 20px; color: #ffffff;">Register</a></li>
-                            <li><a href="{{ url('product') }}" style="font-size: 20px; color: #ffffff;">Products</a></li>
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ url('products') }}">Products</a></li>
                             <li>
-                                <a href="{{ url('cart') }}" style="font-size: 20px; color: #ffffff;"><span class="glyphicon glyphicon-shopping-cart" style="color:white" aria-hidden="true" ></span> Cart({{ count(session('cart')) }})</a>
+                                <a href="{{ url('cart') }}"><span class="glyphicon glyphicon-shopping-cart" style="color:white" aria-hidden="true" ></span> Cart({{ count(session('cart')) }})</a>
                             </li>
                         @else
                             <li class="dropdown">
-                                <a href="#" style="font-size: 20px; color: #ffff; padding-top: 35px" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" >
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
 
-                                     <li><a href="{{ url('/profile') }}" >Edit Profile</a></li>
-                                     <li><a href="#" >Manage Menu</a></li>
+                                     <li><a href="{{ url('/dashboard') }}" > Manage Menu </a></li>
+                                     <li><a href="{{ url('/staff/manageOrder')}}"> Manage Order </a></li>
 
                                     <li>
                                         <a href="{{ route('logout') }}"

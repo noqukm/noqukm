@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
  //Table Name 
- protected $table ='products';
+ public $table ='products';
  //Primary Key 
  public $primaryKey ='id';
  //Timestamps 
  public $timestamps = true; 
 
- public function user(){
-     return $this->belongsTo('App\User');
+ public function staff(){
+     return $this->belongsTo('App\Staff');
 
  }
 }

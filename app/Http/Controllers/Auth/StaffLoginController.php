@@ -26,14 +26,13 @@ class StaffLoginController extends Controller
         //Validate the form data
          $this->validate($request,
           [
-        'staff_id' => 'required',
-        'email' =>'required',
-        'password' => 'required|min:6'
+            'email' =>'required',
+            'password' => 'required|min:6'
          ]);
 
         //Attempt to log user in
 
-        if (Auth::guard('staff')->attempt(['staff_id' => $request->staff_id,'password' => $request->password], $request->remember)) 
+        if (Auth::guard('staff')->attempt(['email' => $request->email,'password' => $request->password], $request->remember)) 
         {
         	  //if successful, then redirect to their intended location
 
@@ -41,7 +40,7 @@ class StaffLoginController extends Controller
         }
         
         //if unsuccessful, then redirect to the login with the form data
-        return redirect()->back()->withInput($request->only('staff_id','remember'));
+        return redirect()->back()->withInput($request->only('email','remember'));
 
     }
 

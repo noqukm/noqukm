@@ -23,13 +23,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/home', 'HomeController@index');
 	Route::get('/profile','ProfileController@index');
 	Route::get('/editProfile','ProfileController@editProfile');
-<<<<<<< HEAD
 	Route::post('/editProfile', 'ProfileController@editProfile');
 	Route::get('verifyEmailFirst','Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst'); //verification
 	Route::get('verify/{email}/{verifyToken}','Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
-=======
-	
->>>>>>> 56d348b178ed3b68d623ffc204638bec93cc01e5
 	Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 });
 Route::get('verifyEmailFirst','Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');//verification
@@ -59,7 +55,7 @@ Route::post('/admin/password/reset', 'Auth\AdminResetPasswordController@reset');
 Route::get('/admin/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
 
 //CART
-Route::get('/product', 'ProductsController@index');
+//Route::get('/product', 'ProductsController@index');
 Route::get('/cart', 'ProductsController@cart');
 Route::get('add-to-cart/{id}', 'ProductsController@addToCart');
 Route::patch('update-cart', 'ProductsController@update');
@@ -67,4 +63,7 @@ Route::delete('remove-from-cart', 'ProductsController@remove');
 
 //PRODUCT
 Route::resource('products','MenuController');
-Route::get('/dashboard','Dashboardcontroller@index');
+Route::get('/dashboard','DashboardController@index');
+
+//PRODUCT VIEW FOR CUSTOMER
+Route::get('/product', 'ProductsController@index');

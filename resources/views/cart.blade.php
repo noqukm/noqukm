@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.customer_navbar')
  
 @section('title', 'Cart')
  
