@@ -13,6 +13,7 @@ class Product extends Model
  //Timestamps 
  public $timestamps = true; 
 
+ 
  public function staff(){
      return $this->belongsTo('App\Staff');
 

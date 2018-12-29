@@ -7,13 +7,15 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
                 <div class="panel-body">
-                    <a href="/noqukm/public/products/create" class="btn btn-primary">Create Food</a>
+                    <a href="/noqukm/public/products/create" class="btn btn-info">Create Food</a>
                     <h3> Your Stall Menu</h3>
                     
                     @if(count($products)>0)
                     <table class="table table-striped">
                         <tr>
                             <th>Food</th>
+                            <th>Price</th>
+                            <th>Type</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -21,16 +23,16 @@
                         <tr>
                             <th>{{$product->name}}</th>
                             <th>RM {{$product->price}}</th>
-                            <th><img src="storage/photos/{{$product->photo}}" width=100, height=100></th>
-                        <th><a href="/noqukm/public/products/{{$product->id}}/edit" class="btn btn-default">Edit</a></th>
-                            <th></th>
+                            <th>{{$product->type}}</th>
+                            <th><img src="{{$product->photo}}" width=100, height=100></th>
+                        <th><a href="/noqukm/public/products/{{$product->id}}/edit" class="btn btn-primary glyphicon glyphicon-pencil"> Edit</a></th>
                         </tr>
                         @endforeach
                     </table>
                     @else
                     <p>You have no products</p>
                     @endif
-
+                    {{ $products->links() }}
                     <p>
                         <a href="{{ url('/staff')}}"><button type="button" class="btn btn-default btn-sm">
                             <span class="glyphicon glyphicon-home"></span> Back to Home

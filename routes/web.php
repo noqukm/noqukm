@@ -18,32 +18,40 @@ Route::get('/', function () {
 Auth::routes();
 
 //USER
-Route::group(['middleware' => 'auth'], function () {
-
-	Route::get('/home', 'HomeController@index');
-	Route::get('/profile','ProfileController@index');
-	Route::get('/editProfile','ProfileController@editProfile');
-	Route::post('/editProfile', 'ProfileController@editProfile');
-	Route::get('verifyEmailFirst','Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst'); //verification
-	Route::get('verify/{email}/{verifyToken}','Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
-	Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
-});
-Route::get('verifyEmailFirst','Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst');//verification
+Route::get('verifyEmailFirst','Auth\RegisterController@verifyEmailFirst')->name('verifyEmailFirst'); //verification
 Route::get('verify/{email}/{verifyToken}','Auth\RegisterController@sendEmailDone')->name('sendEmailDone');
+Route::post('/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
-//Route::get('/home', 'HomeController@index');
-//Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
+//CART & CHECKOUT
+Route::get('/product', ['uses' => 'ProductsController@index', 'as' => 'product-index']);
+Route::get('/add-to-cart/{id}', ['uses' => 'ProductsController@getAddToCart', 'as' => 'product.addToCart']);
+Route::get('/add-item/{id}', ['uses' => 'ProductsController@getAddItem', 'as' => 'product.item']);
+Route::get('/remove/{id}', ['uses' => 'ProductsController@getRemoveByOne', 'as' => 'product.removeByOne']);
+Route::get('/removeAll/{id}', ['uses' => 'ProductsController@getRemoveItem','as' => 'product.removeItem']);
+Route::get('/cart', ['uses' => 'ProductsController@getCart', 'as' => 'cart']);
+Route::get('/checkout', ['uses' => 'ProductsController@getCheckout','as' => 'checkout', 'middleware' => 'auth']);
+Route::post('/checkout', ['uses' => 'ProductsController@postCheckout', 'as' => 'checkout', 'middleware' => 'auth']);
+Route::get('/orderReview','ProductsController@orderReview');
+Route::get('/orderReview','ProductsController@orderReview');
 
 //STAFF
 Route::get('/staff/login', 'Auth\StaffLoginController@showLoginForm')->name('staff.login');
 Route::post('/staff/login', 'Auth\StaffLoginController@login')->name('staff.login.submit');
 Route::get('/staff/register', 'Auth\StaffRegisterController@showRegistrationForm')->name('staff.register');
 Route::post('/staff/register', 'Auth\StaffRegisterController@register')->name('staff.register.submit');
-Route::get('/staff/manageOrder', 'OrderController@showOrderList')->name('staff.manageOrder');
+Route::post('staff/logout', 'Auth\StaffLoginController@logout')->name('staff.logout');
+Route::get('/staff/manageOrder', ['as' => 'staffOrder', 'uses' => 'OrderController@showOrderList']);
 Route::get('/staff', 'StaffController@index')->name('staff.dashboard');
+Route::resource('products','MenuController');
+Route::get('/dashboard','DashboardController@index');
+Route::get('/status/{id}', ['as' => 'status', 'uses' => 'OrderController@getOrderStatus']);
+Route::get('toggle/{id}', ['as' => 'toggle', 'uses' => 'OrderController@toggleOrderStatus']);
+Route::get('notify/{id}', ['as' => 'notify', 'uses' => 'OrderController@notifyUser']);
+
+
 
 //ADMIN
-Route::get('/admin', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
+/*Route::get('/admin', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/admin', 'Auth\AdminLoginController@login')->name('admin.login.submit');
 Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
 Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -53,17 +61,4 @@ Route::post('/admin/password/email', 'Auth\AdminForgotPasswordController@sendRes
 Route::get('/admin/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
 Route::post('/admin/password/reset', 'Auth\AdminResetPasswordController@reset');
 Route::get('/admin/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
-
-//CART
-//Route::get('/product', 'ProductsController@index');
-Route::get('/cart', 'ProductsController@cart');
-Route::get('add-to-cart/{id}', 'ProductsController@addToCart');
-Route::patch('update-cart', 'ProductsController@update');
-Route::delete('remove-from-cart', 'ProductsController@remove');
-
-//PRODUCT
-Route::resource('products','MenuController');
-Route::get('/dashboard','DashboardController@index');
-
-//PRODUCT VIEW FOR CUSTOMER
-Route::get('/product', 'ProductsController@index');
+*/

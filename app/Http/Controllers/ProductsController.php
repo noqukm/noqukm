@@ -3,112 +3,139 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Session;
 use App\Product;
 use App\Order;
+use App\Cart;
+use Stripe\Charge;
+use Stripe\Stripe;
+use Auth;
 
 class ProductsController extends Controller
 {
   
       public function index()
     {
-        $products = Product::orderBy('name','asc')->paginate(5);
-        //$products = Product::all();
-        //$products = Product::orderBy('title','asc')->get(); to order items desc/asc ->take(1) for 1
-        //$product = Product::where('name','Nasi Lemak')->get();
-        /*return view('products', compact('products'));*/
-        //$products = DB::select('SELECT* FROM PRODUCTS');
-        return view('product-index')->with('products',$products);
+        $products = Product::paginate(6);
+        $products = Product::orderBy('type','asc')->paginate(6);
+        return view('product-index', ['products' => $products]);
     }
  
-    public function cart()
-    {
-        return view('cart');
-    }
-
-
-    public function addToCart($id)
-
+     public function getAddToCart(Request $request, $id)
     {
         $product = Product::find($id);
- 
-        if(!$product) {
- 
-            abort(404);
- 
-        }
- 
-        $cart = session()->get('cart');
- 
-        // if cart is empty then this the first product
-        if(!$cart) {
- 
-            $cart = [
-                    $id => [
-                        "name" => $product->name,
-                        "quantity" => 1,
-                        "price" => $product->price,
-                        "photo" => $product->photo
-                    ]
-            ];
- 
-            session()->put('cart', $cart);
- 
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
-        }
- 
-        // if cart not empty then check if this product exist then increment quantity
-        if(isset($cart[$id])) {
- 
-            $cart[$id]['quantity']++;
- 
-            session()->put('cart', $cart);
- 
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
- 
-        }
- 
-        // if item not exist in cart then add to cart with quantity = 1
-        $cart[$id] = [
-            "name" => $product->name,
-            "quantity" => 1,
-            "price" => $product->price,
-            "photo" => $product->photo
-        ];
- 
-        session()->put('cart', $cart);
- 
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart ($oldCart);
+        $cart -> add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect()->route('product-index');
+    }
+    public function getAddItem(Request $request, $id)
+    {
+        $product = Product::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart ($oldCart);
+        $cart -> add($product, $product->id);
+
+        $request->session()->put('cart', $cart);
+        return redirect()->route('cart');
     }
 
-    //UPDATE AND REMOVE FROM THE CART
-    public function update(Request $request)
+    public function getRemoveByOne($id)
     {
-        if($request->id and $request->quantity)
-        {
-            $cart = session()->get('cart');
- 
-            $cart[$request->id]["quantity"] = $request->quantity;
- 
-            session()->put('cart', $cart);
- 
-            session()->flash('success', 'Cart updated successfully');
-        }
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart ($oldCart);
+        $cart->removeByOne($id);
+
+        Session::put('cart', $cart);
+        return redirect()->route('cart');
     }
- 
-    public function remove(Request $request)
+
+    public function getRemoveItem($id)
     {
-        if($request->id) {
- 
-            $cart = session()->get('cart');
- 
-            if(isset($cart[$request->id])) {
- 
-                unset($cart[$request->id]);
- 
-                session()->put('cart', $cart);
-            }
- 
-            session()->flash('success', 'Product removed successfully');
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart ($oldCart);
+        $cart->removeItem($id);
+
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        }else {
+            Session::forget('cart');
         }
+        return redirect()->route('cart');
+    }
+
+    public function getCart()
+    {
+        if (!Session ::has('cart')) {
+            return view('cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view ('cart', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
+     public function getCheckout()
+     {
+        if (!Session::has('cart')) {
+            return view('cart');
+    }
+    $oldCart = Session::get('cart');
+    $cart = new Cart ($oldCart);
+    $total = $cart->totalPrice;
+    return view ('checkout', ['total' => $total]);
+    }
+
+    public function postCheckout(Request $request){
+        if (!Session::has('cart')) {
+        return redirect()->route('cart');
+    }
+    $oldCart = Session::get('cart');
+    $cart = new Cart ($oldCart);
+
+        Stripe::setApiKey('sk_test_daNoCmKeFkumWMQlexvzaxPy');
+        try {
+            $charge = Charge::create(array(
+                "amount" => $cart->totalPrice * 100 * 4,
+                "currency" => "myr",
+                "source" => $request->input('stripeToken'),
+                "description" => "test charge"
+            ) );
+            $order = new Order();
+            $order->cart = serialize($cart);
+            $order->cust_name = $request->input('cust_name');
+            $order->email = $request->input('email');
+            $order->contact = $request->input('contact');
+            $order->payment_id = $charge->id;
+            $order->status=(0);
+            Auth::user()->orders()->save($order);
+
+        }
+        catch (\Exception $e){
+            return redirect()->route('checkout')->with('error', $e->getMessage());
+        }
+        session::forget('cart');
+        return redirect()->route('product-index')->with('success', 'Successfully ordered!');
+    }
+
+    public function orderReview(){
+
+        if (!Session ::has('cart')) {
+            return view('cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view ('review-order', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
+    }
+
+     public function receipt(){
+
+        if (!Session ::has('cart')) {
+            return view('cart');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        return view ('receipt', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 }

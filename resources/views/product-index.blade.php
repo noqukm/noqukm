@@ -1,30 +1,39 @@
 @extends('layouts.customer_navbar')
 
 @section('content')
-<div class="container">
-    <div class="row">
-    <h1>Menu</h1>
-    @if(count($products) > 0)
-        @foreach($products as $product)
-            <div class="well">
-            <img src="storage/photos/{{$product->photo}}" width=100, height=100>
-            <h3>{{$product->name}}</h3>
-            <h4>Price: RM {{$product->price}}</h3>
-            <h4>Description: {{$product->description}}</h4>
+@if(Session::has('success'))
+<div class="row">
+    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+        <div id="charge message" class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    </div>
+</div>
+@endif
 
-            <p>
-                <a href="{{ url('add-to-cart/'.$product->id) }}"><button type="button" class="btn btn-default btn-sm">
-                  <span class="glyphicon glyphicon-shopping-cart"></span> Add to Cart
-                </button>
-                </a>
-            </p>
-              
+<div class="container">
+    @foreach($products->chunk(3) as $productChunk)
+    <div class="row">
+        @foreach($productChunk as $product)
+        <div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <img src="{{$product->photo}}" alt="..." width="300px" height="50px" style="object-fit: scale-down;">
+                <div class="caption">
+                    <h3>{{$product->name}}</h3>
+                    <p class="type">Type: {{$product->type}}</p>
+                    <i><p class="description">{{$product->description}}</p></i>
+                    <div class="clearfix">
+                       <h4><b><div class="pull-left price"> RM {{$product->price}}</div></b></h4>
+                        <a href="{{ route('product.addToCart', ['id' => $product->id]) }}" class="btn btn-success pull-right" role="button">Add to Cart</a>
+                    </div>
+                </div>
             </div>
-            @endforeach
-            {{$products->links()}} <!-- pagination -->
-    @else
-        <p>No posts found</p>
-    @endif
-</div>
-</div>
+        </div>
+        @endforeach
+    </div>
+    @endforeach
+    {{ $products->links() }}
+
+</div>  
+
 @endsection

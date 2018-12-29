@@ -1,4 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.customer_navbar')
+
+
 
 @section('content')
 <div class="container">
@@ -10,10 +12,10 @@
                 <div class="panel-body">
                 
                   <form class="form-horizontal" method="POST" action="{{ url('/editProfile') }}">
-                        {{ csrf_field() }}
+                        {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label" style="font-size: 18px; color: #512da8">Enter Name</label>
+                            <label for="name" class="col-md-4 control-label" >Name</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="name" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
@@ -26,22 +28,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('profilepic') ? ' has-error' : '' }}">
-                            <label for="v" class="col-md-4 control-label" style="font-size: 18px; color: #512da8;">Profile Picture</label>
-
-                            <div class="col-md-6">
-                                <input id="profilepic" type="file" class="form-control" name="profilepic" required>
-
-                                @if ($errors->has('profilepic'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('profilepic') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="v" class="col-md-4 control-label" style="font-size: 18px; color: #512da8;">E-mail</label>
+                            <label for="email" class="col-md-4 control-label" >E-mail</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="input" class="form-control" name="email" required>
@@ -54,8 +42,22 @@
                             </div>
                         </div>
 
+                         <div class="form-group{{ $errors->has('phonenumber') ? ' has-error' : '' }}">
+                            <label for="phonenumber" class="col-md-4 control-label" >Phone Number</label>
+
+                            <div class="col-md-6">
+                                <input id="phonenumber" type="input" class="form-control" name="phonenumber" required>
+
+                                @if ($errors->has('phonenumber'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('phonenumber') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('changepwd') ? ' has-error' : '' }}">
-                            <label for="v" class="col-md-4 control-label" style="font-size: 18px; color: #512da8;">Change Password</label>
+                            <label for="v" class="col-md-4 control-label" >Change Password</label>
 
                             <div class="col-md-6">
                                 <input id="changepwd" type="password" class="form-control" name="changepwd" required>
@@ -69,7 +71,7 @@
                         </div>
 
                          <div class="form-group{{ $errors->has('retypepwd') ? ' has-error' : '' }}">
-                            <label for="v" class="col-md-4 control-label" style="font-size: 18px; color: #512da8;">Re-type Password</label>
+                            <label for="v" class="col-md-4 control-label" >Re-type Password</label>
 
                             <div class="col-md-6">
                                 <input id="retypepwd" type="password" class="form-control" name="retypepwd" required>
@@ -82,7 +84,6 @@
                             </div>
                         </div>
 
-                        
 
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-4">

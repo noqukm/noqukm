@@ -18,7 +18,7 @@ class MenuController extends Controller
     
     public function index()
     {
-        $products = Product::orderBy('name','asc')->paginate(5);
+        $products = Product::orderBy('type','asc')->paginate(5);
         //$products = Product::all();
         //$products = Product::orderBy('title','asc')->get(); to order items desc/asc ->take(1) for 1
         //$product = Product::where('name','Nasi Lemak')->get();
@@ -40,9 +40,10 @@ class MenuController extends Controller
          //validation
          $this->validate($request,[
             'name' => 'required',
-            'price' => 'required',
             'photo' => 'image|nullable|max:1999',
-            'description' => 'required'
+            'price' => 'required',
+            'type' => 'required',
+            'description' => 'required'  
         ]);
 
          //Handle File Upload
@@ -67,6 +68,7 @@ class MenuController extends Controller
         }
         $product->price = $request->input('price');
         $product->description = $request->input('description');
+        $product->type = $request->input('type');
         $product->save();
         return redirect('/dashboard')->with('success','Post Updated');
     }
@@ -80,6 +82,7 @@ class MenuController extends Controller
             'name' => 'required',
             'price' => 'required',
             'photo' => 'image|nullable|max:1999',
+            'type' => 'required',
             'description' => 'required'
         ]);
 
@@ -105,6 +108,8 @@ class MenuController extends Controller
         $product->photo = $fileNametoStore;
         $product->price = $request->input('price');
         $product->description = $request->input('description');
+        $product->type = $request->input('type');
+
         //$product->staff_id = auth()->staff()->id;
         $product->save();
         return redirect('/dashboard')->with('success','Post Created');
