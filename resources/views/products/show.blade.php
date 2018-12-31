@@ -6,7 +6,7 @@
     <a href="/noqukm/public/products" class="btn btn-default">Go Back</a>
     <h1>{{$product-> name}}</h1>
     <div class="well">
-            <h2><img src="data:image/jpg;base64,{{ chunk_split(base64_encode($product->photo)) }}" height="100" width="100">
+            <h2><img src="storage/images/{{$product->photo}}" height="100" width="100">
             </h2>
                 <h2>Price: RM {{$product->price}}</h2>
                 <small>Description: {{$product->description}}</small>

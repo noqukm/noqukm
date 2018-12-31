@@ -7,7 +7,7 @@
     @if(count($products) > 0)
         @foreach($products as $product)
             <div class="well">
-            <img src="storage/photos/{{$product->photo}}" width=100, height=100>
+            <img src="storage/images/{{$product->photo}}" width=100, height=100>
             <h3><a href="/noqukm/public/products/{{$product->id}}">{{$product->name}}</a></h3>
             <h4>Price: RM {{$product->price}}</h3>
             <h4>Description: {{$product->description}}</h4>
