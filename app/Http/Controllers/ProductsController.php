@@ -17,7 +17,7 @@ class ProductsController extends Controller
       public function index()
     {
         $products = Product::paginate(6);
-        $products = Product::orderBy('type','asc')->paginate(6);
+        $products = Product::orderBy('type','desc')->paginate(6);
         return view('product-index', ['products' => $products]);
     }
  
@@ -109,6 +109,7 @@ class ProductsController extends Controller
             $order->contact = $request->input('contact');
             $order->payment_id = $charge->id;
             $order->status=(0);
+            $order->deleted_at=null;
             Auth::user()->orders()->save($order);
 
         }
@@ -129,13 +130,4 @@ class ProductsController extends Controller
         return view ('review-order', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
     }
 
-     public function receipt(){
-
-        if (!Session ::has('cart')) {
-            return view('cart');
-        }
-        $oldCart = Session::get('cart');
-        $cart = new Cart($oldCart);
-        return view ('receipt', ['products' => $cart->items, 'totalPrice' => $cart->totalPrice]);
-    }
 }

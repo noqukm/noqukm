@@ -7,6 +7,7 @@ use App\Order;
 use App\Notifications\OrderUpdated;
 use Notifications;
 
+
 class OrderController extends Controller
 {
 
@@ -64,9 +65,7 @@ class OrderController extends Controller
      
     function toggleOrderStatus($id){
          
-         // get the jedi and toggle his/her lightsaber
         $order = Order::findOrFail($id);
-         
         $order->status = !$order->status;
         $order->save();
          
@@ -85,7 +84,8 @@ class OrderController extends Controller
     //DELETE ORDER ITEM
    public function remove($id)
     {
-      $orders = Order::find($order);
+
+      $orders = Order::paginate(5);
       $orders->delete();
 
       return redirect('/manageOrder');

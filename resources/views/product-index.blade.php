@@ -12,12 +12,14 @@
 @endif
 
 <div class="container">
+    <i><h2><b>Products Catalogue</b></h2></i>
+    <hr>
     @foreach($products->chunk(3) as $productChunk)
     <div class="row">
         @foreach($productChunk as $product)
         <div class="col-sm-6 col-md-4">
             <div class="thumbnail">
-                <img src="{{$product->photo}}" alt="..." width="300px" height="50px" style="object-fit: scale-down;">
+                <img src="storage/images/{{$product->photo}}" alt="..." width="500" height="500" style="object-fit: scale-down;">
                 <div class="caption">
                     <h3>{{$product->name}}</h3>
                     <p class="type">Type: {{$product->type}}</p>

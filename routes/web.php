@@ -32,7 +32,6 @@ Route::get('/cart', ['uses' => 'ProductsController@getCart', 'as' => 'cart']);
 Route::get('/checkout', ['uses' => 'ProductsController@getCheckout','as' => 'checkout', 'middleware' => 'auth']);
 Route::post('/checkout', ['uses' => 'ProductsController@postCheckout', 'as' => 'checkout', 'middleware' => 'auth']);
 Route::get('/orderReview','ProductsController@orderReview');
-Route::get('/orderReview','ProductsController@orderReview');
 
 //STAFF
 Route::get('/staff/login', 'Auth\StaffLoginController@showLoginForm')->name('staff.login');
@@ -47,18 +46,3 @@ Route::get('/dashboard','DashboardController@index');
 Route::get('/status/{id}', ['as' => 'status', 'uses' => 'OrderController@getOrderStatus']);
 Route::get('toggle/{id}', ['as' => 'toggle', 'uses' => 'OrderController@toggleOrderStatus']);
 Route::get('notify/{id}', ['as' => 'notify', 'uses' => 'OrderController@notifyUser']);
-
-
-
-//ADMIN
-/*Route::get('/admin', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-Route::post('/admin', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-Route::get('/admin/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-Route::post('/admin/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-Route::get('/admin/dashboard', 'AdminController@index')->name('admin.dashboard');
-Route::get('/admin/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-Route::post('/admin/password/email', 'Auth\AdminForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-Route::get('/admin/password/reset', 'Auth\AdminForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-Route::post('/admin/password/reset', 'Auth\AdminResetPasswordController@reset');
-Route::get('/admin/password/reset/{token}', 'Auth\AdminResetPasswordController@showResetForm')->name('admin.password.reset');
-*/

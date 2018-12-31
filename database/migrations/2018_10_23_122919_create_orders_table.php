@@ -19,10 +19,12 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->text('cart');
             $table->string('cust_name');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('contact');
             $table->string('payment_id');
             $table->boolean('status');
+            $table->time('deleted_at');
+
         });
     }
 

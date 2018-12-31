@@ -57,7 +57,7 @@ class MenuController extends Controller
             //Filename to store
             $fileNametoStore= $filename.'_'.time().'.'.$extension;
             //Upload Image
-            $path = $request->file('photo')->storeAs('public/photos',$fileNametoStore);
+            $path = $request->file('photo')->storeAs('public/images',$fileNametoStore);
          }
         
         //create product in database 
@@ -97,7 +97,7 @@ class MenuController extends Controller
             //Filename to store
             $fileNametoStore= $filename.'_'.time().'.'.$extension;
             //Upload Image
-            $path = $request->file('photo')->storeAs('public/photos',$fileNametoStore);
+            $path = $request->file('photo')->storeAs('public/images',$fileNametoStore);
         }else{
             $fileNametoStore = 'noimage.jpg';
         }
@@ -120,7 +120,7 @@ class MenuController extends Controller
         $product->delete();
         if($product->photo !='noimage.jpg'){
                 //Delete Image
-                Storage::delete('public/photos/'.$product->photo);
+                Storage::delete('public/images/'.$product->photo);
         }
         return redirect('/dashboard')->with('success','Post Removed');
     }

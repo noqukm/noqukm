@@ -7,9 +7,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
                 <div class="panel-body">
-                    <a href="/noqukm/public/products/create" class="btn btn-info">Create Food</a>
+                    <a href="/noqukm/public/products/create" class="btn btn-info btn-lg">Create New Product</a>
                     <h3> Your Stall Menu</h3>
-                    
+                    <hr>
                     @if(count($products)>0)
                     <table class="table table-striped">
                         <tr>
@@ -24,8 +24,10 @@
                             <th>{{$product->name}}</th>
                             <th>RM {{$product->price}}</th>
                             <th>{{$product->type}}</th>
-                            <th><img src="{{$product->photo}}" width=100, height=100></th>
-                        <th><a href="/noqukm/public/products/{{$product->id}}/edit" class="btn btn-primary glyphicon glyphicon-pencil"> Edit</a></th>
+                            <th><img src="storage/images/{{$product->photo}}" width=100, height=100></th>
+                            <th>
+                                <a href="/noqukm/public/products/{{$product->id}}/edit" class="btn btn-primary glyphicon glyphicon-pencil"> Edit</a>
+                            </th>
                         </tr>
                         @endforeach
                     </table>
@@ -46,8 +48,6 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-           
                 </div>
                 </div>
             </div>

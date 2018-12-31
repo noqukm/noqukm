@@ -26,9 +26,12 @@
                     @if (session('status')) <!--showing whether user is verified or not -->
                     {{session('status')}}
                     @endif
-                <div class="panel-heading">Customer Login</div>
+                <div class="panel-heading">Customer Login
+                    <a href="{{ route('staff.login')}}">Staff Login</a>
 
-                <div class="panel-body">
+                </div>
+
+                <div class="panel-body">    
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
@@ -65,6 +68,9 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                    </label>
+                                    <label>
+                                        <a href="{{ route('register')}}">Don't have an account? Register Now</a>
                                     </label>
                                 </div>
 
